@@ -35,49 +35,6 @@ func main() {
 
 }
 
-func sendSlackMessage(slackClient slack.Client) {
-	channelId := os.Getenv("SLACK_CHANNEL_ID")
-
-	slackAttachment := slack.Attachment{
-		Pretext: "Super Bot Message",
-		Color:   "#36a64f",
-		Fields: []slack.AttachmentField{
-			{
-				Title: "Date",
-				Value: time.Now().String(),
-				Short: true,
-			},
-			{
-				Title: "Message",
-				Value: "Hello there",
-				Short: true,
-			},
-			{
-				Title: "Test",
-				Value: "Hello here",
-				Short: true,
-			}, {
-				Title: "Test",
-				Value: "Hello here",
-				Short: true,
-			}, {
-				Title: "Test",
-				Value: "Hello here",
-				Short: true,
-			},
-		},
-	}
-
-	res, res2, err := slackClient.PostMessage(
-		channelId, slack.MsgOptionAttachments(slackAttachment),
-	)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Print(res)
-	fmt.Print(res2)
-}
-
 // processNewEvents will be reading from Events channel
 func processNewEvents(ctx context.Context, client *slack.Client, socketClient *socketmode.Client) {
 	for {
